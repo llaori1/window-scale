@@ -1,0 +1,323 @@
+[gd_scene load_steps=17 format=3 uid="uid://tp1rlfpqcjvu"]
+
+[ext_resource type="Script" path="res://script/main.gd" id="1_8v4d7"]
+[ext_resource type="Texture2D" uid="uid://bnvu0w1bt0qdk" path="res://asset/main_menu2.png" id="2_1m3q2"]
+[ext_resource type="PackedScene" uid="uid://cp5ikj73eqa16" path="res://scene/main_menu.tscn" id="2_3u0uk"]
+[ext_resource type="Theme" uid="uid://cty84766drvpt" path="res://asset/canvas.tres" id="2_4576e"]
+[ext_resource type="Texture2D" uid="uid://ddfvvyn4x7lkh" path="res://asset/main_menu1.png" id="2_kd2wg"]
+[ext_resource type="Texture2D" uid="uid://cdsysibgtuyl6" path="res://asset/main_menu3.png" id="3_16ytg"]
+[ext_resource type="PackedScene" uid="uid://cnycw170kb0e4" path="res://scene/config_menu.tscn" id="3_ur6s2"]
+[ext_resource type="AudioStream" uid="uid://dp7vo6exh3kv" path="res://asset/VGMA Challenge - July 21th.wav" id="4_nx1di"]
+[ext_resource type="Shader" path="res://asset/shader/label.gdshader" id="5_w2uyo"]
+[ext_resource type="PackedScene" uid="uid://jmnldvrgmjp5" path="res://scene/info.tscn" id="6_s81r0"]
+[ext_resource type="Script" path="res://script/gui/window_animation.gd" id="7_8k1s2"]
+[ext_resource type="Texture2D" uid="uid://djqjqjduxg1ns" path="res://window.png" id="8_2k6ah"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d0xdy"]
+shader = ExtResource("5_w2uyo")
+
+[sub_resource type="Animation" id="Animation_ed0xf"]
+resource_name = "BackGround"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackGroundAnimation/MenuBackGround:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1920, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_80g80"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackGroundAnimation/MenuBackGround:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kkd45"]
+_data = {
+"BackGround": SubResource("Animation_ed0xf"),
+"RESET": SubResource("Animation_80g80")
+}
+
+[node name="Main" type="Control" node_paths=PackedStringArray("main_menu", "config_menu", "info_panel")]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8v4d7")
+main_menu = NodePath("GUI/MainMenu")
+config_menu = NodePath("GUI/ConfigMenu")
+info_panel = NodePath("GUI/InfoPanel")
+
+[node name="BackGround" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_kd2wg")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="ActiveArea" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 218.0
+offset_top = 137.0
+offset_right = -197.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_16ytg")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MainCanvas" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -958.0
+offset_right = 958.0
+offset_bottom = 73.0
+grow_horizontal = 2
+theme = ExtResource("2_4576e")
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/PanelContainer"]
+layout_mode = 2
+
+[node name="Info" type="HBoxContainer" parent="GUI/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="MousPos" type="Label" parent="GUI/PanelContainer/MarginContainer/Info"]
+layout_mode = 2
+
+[node name="FPS" type="Label" parent="GUI/PanelContainer/MarginContainer/Info"]
+layout_mode = 2
+
+[node name="CurLevel" type="Label" parent="GUI/PanelContainer/MarginContainer/Info"]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Health" type="Label" parent="GUI/PanelContainer/MarginContainer/Info"]
+material = SubResource("ShaderMaterial_d0xdy")
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="LastTime" type="Label" parent="GUI/PanelContainer/MarginContainer/Info"]
+material = SubResource("ShaderMaterial_d0xdy")
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Restart" type="Button" parent="GUI/PanelContainer/MarginContainer/Info"]
+layout_mode = 2
+text = "Restart Level"
+
+[node name="NextLevel" type="Button" parent="GUI/PanelContainer/MarginContainer/Info"]
+visible = false
+layout_mode = 2
+text = "Next Level"
+
+[node name="InfoPanel" parent="GUI" instance=ExtResource("6_s81r0")]
+unique_name_in_owner = true
+
+[node name="BackGroundAnimation" type="Control" parent="GUI"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuBackGround" type="TextureRect" parent="GUI/BackGroundAnimation"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 18160.0
+offset_bottom = 7716.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1m3q2")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="WindowAnimation" type="Control" parent="GUI/BackGroundAnimation"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 315.0
+offset_top = 530.0
+offset_right = 705.0
+offset_bottom = 869.0
+script = ExtResource("7_8k1s2")
+window_global_position = Vector2(315, 530)
+
+[node name="Window" type="NinePatchRect" parent="GUI/BackGroundAnimation/WindowAnimation"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00308, 0.997995)
+texture = ExtResource("8_2k6ah")
+region_rect = Rect2(40, 30, 214, 244)
+patch_margin_left = 10
+patch_margin_top = 70
+patch_margin_right = 30
+patch_margin_bottom = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="GUI/BackGroundAnimation/WindowAnimation"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/BackGroundAnimation/WindowAnimation/CenterContainer"]
+layout_mode = 2
+
+[node name="EnemyInfo" type="GridContainer" parent="GUI/BackGroundAnimation/WindowAnimation/CenterContainer/PanelContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="EnemyHealth" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="CurScale" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="ScaleLimit" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="ScaleSpeed" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="MoveSpeed" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="PlayerHealth" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="TimeLimit" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="WindowAnimation2" type="Control" parent="GUI/BackGroundAnimation"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1159.0
+offset_top = 382.0
+offset_right = 1549.0
+offset_bottom = 721.0
+script = ExtResource("7_8k1s2")
+window_global_position = Vector2(1159, 382)
+
+[node name="Window" type="NinePatchRect" parent="GUI/BackGroundAnimation/WindowAnimation2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00308, 0.997995)
+texture = ExtResource("8_2k6ah")
+region_rect = Rect2(40, 30, 214, 244)
+patch_margin_left = 10
+patch_margin_top = 70
+patch_margin_right = 30
+patch_margin_bottom = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="GUI/BackGroundAnimation/WindowAnimation2"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GUI/BackGroundAnimation/WindowAnimation2/CenterContainer"]
+layout_mode = 2
+
+[node name="EnemyInfo" type="GridContainer" parent="GUI/BackGroundAnimation/WindowAnimation2/CenterContainer/PanelContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="EnemyHealth" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation2/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="CurScale" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation2/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="ScaleLimit" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation2/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="ScaleSpeed" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation2/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="MoveSpeed" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation2/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="PlayerHealth" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation2/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="TimeLimit" type="Label" parent="GUI/BackGroundAnimation/WindowAnimation2/CenterContainer/PanelContainer/EnemyInfo"]
+layout_mode = 2
+
+[node name="MainMenu" parent="GUI" instance=ExtResource("2_3u0uk")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="ConfigMenu" parent="GUI" instance=ExtResource("3_ur6s2")]
+visible = false
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_nx1di")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../GUI")
+libraries = {
+"": SubResource("AnimationLibrary_kkd45")
+}
+
+[connection signal="pressed" from="GUI/PanelContainer/MarginContainer/Info/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GUI/PanelContainer/MarginContainer/Info/NextLevel" to="." method="_on_next_level_pressed"]

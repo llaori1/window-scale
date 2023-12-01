@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuembwsmwhhb0"]
+
+[ext_resource type="Script" path="res://script/gui/regulator.gd" id="1_xivl3"]
+
+[node name="Regulator" type="HBoxContainer"]
+offset_right = 391.0
+offset_bottom = 31.0
+script = ExtResource("1_xivl3")
+
+[node name="Name" type="Label" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Minus" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.5
+step = 5.0
+value = 20.0
+rounded = true
+
+[node name="Plus" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+"
+
+[connection signal="pressed" from="Minus" to="." method="_on_minus_pressed"]
+[connection signal="value_changed" from="ProgressBar" to="." method="_on_progress_bar_value_changed"]
+[connection signal="pressed" from="Plus" to="." method="_on_plus_pressed"]

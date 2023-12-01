@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://ef2tll57txc6"]
+
+[ext_resource type="Texture2D" uid="uid://djqjqjduxg1ns" path="res://window.png" id="1_uql41"]
+[ext_resource type="Script" path="res://test.gd" id="1_yykt1"]
+
+[node name="test" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 836.0
+offset_top = 45.0
+offset_right = 1242.0
+offset_bottom = 460.0
+script = ExtResource("1_yykt1")
+
+[node name="Window" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_uql41")
+region_rect = Rect2(40, 30, 214, 244)
+patch_margin_left = 10
+patch_margin_top = 40
+patch_margin_right = 30
+patch_margin_bottom = 10

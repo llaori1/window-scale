@@ -1,0 +1,8 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://by2oangur13t4"]
+
+[ext_resource type="Texture2D" uid="uid://bnvu0w1bt0qdk" path="res://asset/main_menu2.png" id="1_qs0cn"]
+
+[resource]
+texture = ExtResource("1_qs0cn")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

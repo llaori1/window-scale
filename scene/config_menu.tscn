@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnycw170kb0e4"]
+
+[ext_resource type="Script" path="res://script/gui/config_menu.gd" id="1_3aavd"]
+[ext_resource type="Theme" uid="uid://cty84766drvpt" path="res://asset/canvas.tres" id="1_pq8q6"]
+[ext_resource type="PackedScene" uid="uid://cuembwsmwhhb0" path="res://scene/regulator.tscn" id="3_mtn4k"]
+
+[node name="ConfigMenu" type="Control" node_paths=PackedStringArray("music")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3aavd")
+music = NodePath("PanelContainer/MarginContainer/Option/Music")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("1_pq8q6")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 600
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 600
+
+[node name="Option" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Music" parent="PanelContainer/MarginContainer/Option" instance=ExtResource("3_mtn4k")]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/Option"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="PanelContainer/MarginContainer/Option"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Restart" type="Button" parent="PanelContainer/MarginContainer/Option"]
+layout_mode = 2
+text = "Restart Level"
+
+[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/Option"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Option/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Option/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Option/Quit" to="." method="_on_quit_pressed"]
